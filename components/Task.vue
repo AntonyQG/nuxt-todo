@@ -17,6 +17,7 @@ export default {
     },
     removeTask() {
       this.$store.commit("REMOVE_TASK", this.task);
+      localStorage.removeItem("tasks");
     },
   },
 };

@@ -1,5 +1,7 @@
 export const state = () => ({
-  tasks: [],
+  tasks: localStorage.getItem("tasks")
+    ? JSON.parse(localStorage.getItem("tasks"))
+    : [],
 });
 
 export const mutations = {
@@ -9,9 +11,12 @@ export const mutations = {
     state.tasks.push({ content: task, done: false });
     state.tasks.unshift({ content: task, done: false });
     */
+    localStorage.setItem("tasks", JSON.stringify(state.tasks));
   },
   REMOVE_TASK(state, task) {
     state.tasks.splice(state.tasks.indexOf(task), 1);
+    localStorage.setItem("tasks", JSON.stringify(state.tasks));
+    localStorage.getItem("tasks");
   },
   TOGGLE_TASK(state, task) {
     task.done = !task.done;
